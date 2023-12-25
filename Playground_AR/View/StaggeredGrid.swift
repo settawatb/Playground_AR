@@ -79,9 +79,9 @@ where T: Hashable {
 }
 
     
-    struct StaggeredGrid_Previews: 
-        PreviewProvider {
-        static var previews: some View {
-            Home()
-    }
-}
+//    struct StaggeredGrid_Previews: 
+//        PreviewProvider {
+//        static var previews: some View {
+//            Home()
+//    }
+//}

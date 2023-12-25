@@ -10,6 +10,9 @@ import SwiftUI
 struct SearchView: View {
     var animation: Namespace.ID
     
+    // SharedData
+    @EnvironmentObject var sharedData: SharedDataModel
+    
     @EnvironmentObject var homeData: HomeViewModel
     
     //Activating Text Field with the help of FocusState
@@ -27,6 +30,9 @@ struct SearchView: View {
                     withAnimation{
                         homeData.searchActivated = false
                     }
+                    homeData.searchText = ""
+                    // Resetting
+                    sharedData.fromSearchPage = false
                     
                 } label: {
                     Image(systemName: "arrow.left")
@@ -51,7 +57,7 @@ struct SearchView: View {
                 .padding(.horizontal)
                 .background(
                     Capsule()
-                        .strokeBorder(Color.purple, lineWidth: 1.5)
+                        .strokeBorder(PurPle, lineWidth: 1.5)
                 )
                 .matchedGeometryEffect(id: "SEARCHBAR", in:animation)
                 .padding(.trailing,20)
@@ -129,15 +135,34 @@ struct SearchView: View {
     func ProductCardView(product: Product) -> some View {
         HStack() {
             VStack(spacing: 1) {
-                Image(product.productImage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: getRect().width / 2 - 40, height: getRect().width / 2 - 40)
-                    .cornerRadius(15)
-                    .shadow(radius: 5)
-                    .offset(y: 20)
-                    .padding(.bottom, 20)
-                    .fixedSize(horizontal: true, vertical: false)
+                
+                ZStack{
+                    if sharedData.showDetailProduct{
+                        Image(product.productImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .opacity(0)
+                            .frame(width: getRect().width / 2 - 40, height: getRect().width / 2 - 40)
+                            .cornerRadius(15)
+                            .shadow(radius: 5)
+                            .offset(y: 20)
+                            .padding(.bottom, 20)
+                            .fixedSize(horizontal: true, vertical: false)
+                    }
+                    else{
+                        Image(product.productImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .matchedGeometryEffect(id: "\(product.id)SEARCH", in: animation)
+                            .frame(width: getRect().width / 2 - 40, height: getRect().width / 2 - 40)
+                            .cornerRadius(15)
+                            .shadow(radius: 5)
+                            .offset(y: 20)
+                            .padding(.bottom, 20)
+                            .fixedSize(horizontal: true, vertical: false)
+                    }
+                }
+                
                 
                 Text(product.title)
                     .font(.custom(customFont, size: 18))
@@ -163,8 +188,15 @@ struct SearchView: View {
                 Color.white
                     .opacity(0.2)
                     .cornerRadius(25)
-                    .shadow(radius: 3)
             )
+            .onTapGesture{
+                
+                withAnimation(.easeInOut){
+                    sharedData.fromSearchPage = true
+                    sharedData.detailProduct = product
+                    sharedData.showDetailProduct = true
+                }
+            }
         }
     }
 }
@@ -172,6 +204,6 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View{
-        Home()
+        MainPage()
     }
 }

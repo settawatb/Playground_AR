@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct Home: View {
-    @Namespace var animation
+    var animation: Namespace.ID
+    
+    // Shared Data
+    @EnvironmentObject var sharedData: SharedDataModel
+    
     @StateObject var homeData: HomeViewModel = HomeViewModel()
     
     var body: some View {
@@ -111,15 +115,34 @@ struct Home: View {
     func ProductCardView(product: Product) -> some View {
         HStack() {
             VStack(spacing: 1) {
-                Image(product.productImage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: getRect().width / 2 - 40, height: getRect().width / 2 - 40)
-                    .cornerRadius(15)
-                    .shadow(radius: 5)
-                    .offset(y: 20)
-                    .padding(.bottom, 20)
-                    .fixedSize(horizontal: true, vertical: false)
+                
+                // Matched Geometry Effect
+                ZStack{
+                    if sharedData.showDetailProduct{
+                        Image(product.productImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .opacity(0)
+                            .frame(width: getRect().width / 2 - 40, height: getRect().width / 2 - 40)
+                            .cornerRadius(15)
+                            .shadow(radius: 5)
+                            .offset(y: 20)
+                            .padding(.bottom, 20)
+                            .fixedSize(horizontal: true, vertical: false)
+                    }
+                    else {
+                        Image(product.productImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: getRect().width / 2 - 40, height: getRect().width / 2 - 40)
+                            .cornerRadius(15)
+                            .shadow(radius: 5)
+                            .offset(y: 20)
+                            .padding(.bottom, 20)
+                            .fixedSize(horizontal: true, vertical: false)
+                            .matchedGeometryEffect(id: "\(product.id)", in: animation)
+                    }
+                }
                 
                 Text(product.title)
                     .font(.custom(customFont, size: 18))
@@ -145,8 +168,15 @@ struct Home: View {
                 Color.white
                     .opacity(0.2)
                     .cornerRadius(25)
-                    .shadow(radius: 3)
             )
+            // Showing Product Detail when tapped
+            .onTapGesture{
+                
+                withAnimation(.easeInOut){
+                    sharedData.detailProduct = product
+                    sharedData.showDetailProduct = true
+                }
+            }
         }
     }
 
@@ -161,7 +191,7 @@ struct Home: View {
             Text(type.rawValue)
                 .font(.custom(customFont, size: 15))
                 .fontWeight(.semibold)
-                .foregroundColor(homeData.productType == type ? Color(red: 125/255, green: 122/255, blue: 255/255) : Color.gray)
+                .foregroundColor(homeData.productType == type ? PurPle : Color.gray)
                 .padding(.bottom, 10)
                 .overlay(
                     ZStack {
@@ -192,6 +222,6 @@ extension View {
 
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
-        Home()
+        MainPage()
     }
 }

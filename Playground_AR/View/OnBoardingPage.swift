@@ -8,6 +8,8 @@
 import SwiftUI
 
 let customFont = "GeneralSans-VariableItalic"
+let PurPle = Color(red: 125/255, green: 122/255, blue: 255/255)
+let LightGray = Color(red: 230 / 255, green: 228 / 255, blue: 230 / 255)
 
 struct OnBoardingPage: View {
     // Showing Login Page
