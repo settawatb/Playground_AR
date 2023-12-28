@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F0ECD7F2B3DF3C10069E26A /* FocusEntity in Frameworks */ = {isa = PBXBuildFile; productRef = 3F0ECD7E2B3DF3C10069E26A /* FocusEntity */; };
 		3F3D49E52B08C95F00A46B5E /* Playground_ARApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3D49E42B08C95F00A46B5E /* Playground_ARApp.swift */; };
 		3F3D49E72B08C95F00A46B5E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3D49E62B08C95F00A46B5E /* ContentView.swift */; };
 		3F3D49E92B08C96100A46B5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F3D49E82B08C96100A46B5E /* Assets.xcassets */; };
@@ -82,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F0ECD7F2B3DF3C10069E26A /* FocusEntity in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +104,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F0ECD7B2B3DF3990069E26A /* AR */ = {
+			isa = PBXGroup;
+			children = (
+				3F0ECD7C2B3DF3AE0069E26A /* ARModel */,
+			);
+			path = AR;
+			sourceTree = "<group>";
+		};
+		3F0ECD7C2B3DF3AE0069E26A /* ARModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ARModel;
+			sourceTree = "<group>";
+		};
 		3F3D49D82B08C95F00A46B5E = {
 			isa = PBXGroup;
 			children = (
@@ -125,6 +142,7 @@
 		3F3D49E32B08C95F00A46B5E /* Playground_AR */ = {
 			isa = PBXGroup;
 			children = (
+				3F0ECD7B2B3DF3990069E26A /* AR */,
 				3FF462F62B1DF19F0053797B /* Model */,
 				3F3D4A1E2B08DDAA00A46B5E /* ViewModel */,
 				3F3D4A142B08CC1400A46B5E /* View */,
@@ -230,6 +248,9 @@
 			dependencies = (
 			);
 			name = Playground_AR;
+			packageProductDependencies = (
+				3F0ECD7E2B3DF3C10069E26A /* FocusEntity */,
+			);
 			productName = Playground_AR;
 			productReference = 3F3D49E12B08C95F00A46B5E /* Playground_AR.app */;
 			productType = "com.apple.product-type.application";
@@ -302,6 +323,9 @@
 				Base,
 			);
 			mainGroup = 3F3D49D82B08C95F00A46B5E;
+			packageReferences = (
+				3F0ECD7D2B3DF3C10069E26A /* XCRemoteSwiftPackageReference "FocusEntity" */,
+			);
 			productRefGroup = 3F3D49E22B08C95F00A46B5E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -528,6 +552,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Playground-AR-Info.plist";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We need access to your photo library to save photos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -559,6 +584,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Playground-AR-Info.plist";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We need access to your photo library to save photos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -690,6 +716,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3F0ECD7D2B3DF3C10069E26A /* XCRemoteSwiftPackageReference "FocusEntity" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/maxxfrazer/FocusEntity";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3F0ECD7E2B3DF3C10069E26A /* FocusEntity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F0ECD7D2B3DF3C10069E26A /* XCRemoteSwiftPackageReference "FocusEntity" */;
+			productName = FocusEntity;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3F3D49D92B08C95F00A46B5E /* Project object */;
 }
